@@ -1,0 +1,6 @@
+pnpm-lock.yaml
+.next
+.sanity
+dist
+packages/sanity-types/src/*.ts
+apps/studio/schema.json

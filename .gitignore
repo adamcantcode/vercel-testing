@@ -1,0 +1,27 @@
+# dependencies
+node_modules/
+.pnpm-store/
+
+# build output
+.next/
+out/
+dist/
+build/
+.turbo/
+.sanity/
+*.tsbuildinfo
+next-env.d.ts
+
+# env files: never committed. See README "Environment variables".
+.env
+.env.*
+
+# vercel
+.vercel
+
+# misc
+.DS_Store
+*.pem
+npm-debug.log*
+.pnpm-debug.log*
+coverage/
