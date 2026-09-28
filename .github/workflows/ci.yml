@@ -1,0 +1,50 @@
+# The merge gate. Branch protection on `main` requires this workflow's
+# "verify" job to pass before a PR can merge. Vercel builds a preview for
+# the same PR in parallel; together they are the "code-review gate".
+name: CI
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    name: verify
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: pnpm/action-setup@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version-file: .nvmrc
+          cache: pnpm
+
+      - name: Install (frozen lockfile)
+        run: pnpm install --frozen-lockfile
+
+      # Schema changed but types weren't regenerated? Fail here, not in prod.
+      - name: Sanity TypeGen is up to date
+        run: |
+          pnpm typegen
+          git diff --exit-code -- packages/sanity-types apps/studio/schema.json \
+            || (echo "::error::Run 'pnpm typegen' and commit the result" && exit 1)
+
+      # Throwaway per-run key (the Flags SDK needs a valid 32-byte key to
+      # build). CI only proves the build works; Vercel builds its own artifact
+      # with the real per-environment secret.
+      - name: Generate ephemeral FLAGS_SECRET
+        run: echo "FLAGS_SECRET=$(node -e "console.log(require('crypto').randomBytes(32).toString('base64url'))")" >> "$GITHUB_ENV"
+
+      - name: Lint, typecheck, build (web + studio)
+        run: pnpm verify

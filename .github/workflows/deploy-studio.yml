@@ -1,0 +1,36 @@
+# Studio deploys independently of the website: only when Studio code
+# (schemas, desk structure, plugins) changes on main.
+# Requires repo secret SANITY_AUTH_TOKEN (sanity.io/manage → API → Tokens,
+# "Deploy Studio" permission).
+name: Deploy Sanity Studio
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - apps/studio/**
+  workflow_dispatch:
+
+concurrency:
+  group: deploy-studio
+  cancel-in-progress: false
+
+permissions:
+  contents: read
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version-file: .nvmrc
+          cache: pnpm
+      - run: pnpm install --frozen-lockfile
+      - name: sanity deploy
+        run: pnpm --filter studio exec sanity deploy -y
+        env:
+          SANITY_AUTH_TOKEN: ${{ secrets.SANITY_AUTH_TOKEN }}
