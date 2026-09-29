@@ -1,0 +1,18 @@
+# Weekly dependency PRs, grouped so the team reviews one PR per ecosystem
+# instead of twenty. Each still goes through CI + a Vercel preview.
+version: 2
+updates:
+  - package-ecosystem: npm
+    directory: /
+    schedule: { interval: weekly, day: monday }
+    open-pull-requests-limit: 5
+    groups:
+      minor-and-patch:
+        update-types: [minor, patch]
+      sanity:
+        patterns: ['sanity', '@sanity/*', 'next-sanity']
+      next:
+        patterns: ['next', 'eslint-config-next', '@next/*', 'react', 'react-dom']
+  - package-ecosystem: github-actions
+    directory: /
+    schedule: { interval: monthly }

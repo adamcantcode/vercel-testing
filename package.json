@@ -1,0 +1,22 @@
+{
+  "name": "vercel-testing",
+  "private": true,
+  "packageManager": "pnpm@10.12.4",
+  "engines": {
+    "node": ">=22.19"
+  },
+  "scripts": {
+    "dev": "turbo run dev",
+    "build": "turbo run build",
+    "lint": "turbo run lint",
+    "typecheck": "turbo run typecheck",
+    "typegen": "pnpm --filter studio typegen",
+    "seed": "pnpm --filter studio seed",
+    "format": "prettier --write .",
+    "verify": "turbo run lint typecheck build"
+  },
+  "devDependencies": {
+    "prettier": "^3",
+    "turbo": "^2"
+  }
+}

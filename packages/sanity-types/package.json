@@ -1,0 +1,10 @@
+{
+  "name": "sanity-types",
+  "version": "0.0.0",
+  "private": true,
+  "description": "Sanity TypeGen output shared by apps/web. Regenerate with `pnpm typegen` at the repo root.",
+  "type": "module",
+  "exports": {
+    ".": "./src/index.ts"
+  }
+}

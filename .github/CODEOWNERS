@@ -1,0 +1,14 @@
+# Review routing. With branch protection's "Require review from Code Owners"
+# enabled (team setting, see README), PRs touching these paths need the
+# owner's approval. Solo mode: informational only.
+
+# Default owner
+*                               @adamcantcode
+
+# High-blast-radius paths: a schema change can break live content, and the
+# proxy runs on every request (locale routing + experiment bucketing).
+/apps/studio/schemas/           @adamcantcode
+/apps/web/proxy.ts              @adamcantcode
+/apps/web/lib/experiments/      @adamcantcode
+/apps/web/lib/analytics/        @adamcantcode
+/.github/                       @adamcantcode

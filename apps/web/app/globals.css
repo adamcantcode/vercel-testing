@@ -1,0 +1,28 @@
+@import 'tailwindcss';
+
+/*
+ * Design tokens. Components use semantic names (ink, surface, line, brand)
+ * rather than raw palette values, so a rebrand is an edit to this block.
+ */
+@theme {
+  --font-sans: var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif;
+
+  --color-ink: #0f172a;
+  --color-ink-soft: #475569;
+  --color-line: #e2e8f0;
+  --color-surface: #ffffff;
+  --color-surface-muted: #f8fafc;
+
+  --color-brand-50: #eef2ff;
+  --color-brand-500: #6366f1;
+  --color-brand-600: #4f46e5;
+  --color-brand-700: #4338ca;
+}
+
+html {
+  scroll-padding-top: 5rem; /* keep #anchors clear of the sticky header */
+}
+
+body {
+  @apply bg-surface text-ink font-sans antialiased;
+}
