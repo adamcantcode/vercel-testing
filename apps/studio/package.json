@@ -24,6 +24,6 @@
   "devDependencies": {
     "@sanity/client": "^8.8.0",
     "@types/react": "^19",
-    "typescript": "^5"
+    "typescript": "^7"
   }
 }
