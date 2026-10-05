@@ -12,17 +12,17 @@
     "seed": "sanity exec scripts/seed.ts --with-user-token"
   },
   "dependencies": {
-    "@sanity/document-internationalization": "^6.2.38",
-    "@sanity/icons": "^5.2.2",
-    "@sanity/vision": "6.16.0",
-    "react": "19.2.8",
-    "react-dom": "19.2.8",
-    "sanity": "6.16.0",
-    "sanity-plugin-internationalized-array": "^5.3.1",
+    "@sanity/document-internationalization": "^6.2.39",
+    "@sanity/icons": "^5.2.3",
+    "@sanity/vision": "6.17.0",
+    "react": "19.3.0",
+    "react-dom": "19.3.0",
+    "sanity": "6.17.0",
+    "sanity-plugin-internationalized-array": "^5.3.2",
     "styled-components": "^6.1.15"
   },
   "devDependencies": {
-    "@sanity/client": "^8.8.0",
+    "@sanity/client": "^8.9.0",
     "@types/react": "^19",
     "typescript": "^5"
   }
